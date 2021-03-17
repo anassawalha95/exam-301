@@ -18,7 +18,7 @@ app.use(methodOverride('_method'));
 app.use(express.static('./public'));
 app.set('view engine', 'ejs');
 //const client = new pg.Client(process.env.DATABASE_URL);
- const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
+const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
 
 
 app.get("/", home)
@@ -26,6 +26,7 @@ app.get("/allCountries", allCountries)
 
 app.get("/myRecords", myRecords)
 
+app.post("/", getCountryResult)
 app.post("/myRecords", saveRecords)
 
 app.delete("/myRecords", deleteRecord)
@@ -92,7 +93,20 @@ function deleteRecord(req, res, next) {
     res.redirect("/myRecords")
 }
 
+function getCountryResult(req, res, next) {
+    let { country, startDate, endDate } = req.body
+    let url = `https://api.covid19api.com/country/${country}/status/confirmed?from=${startDate}&to=${endDate}`
+    superagent.get(url).then((result) => {
 
+        let countriesData = result.body.Countries.map(val =>
+            new Country(val)
+        )
+
+
+        res.render("pages/getCountryResult.ejs", { countries: countriesData })
+    })
+
+}
 
 client.connect().then(() => {
     app.listen(port || 3000)
