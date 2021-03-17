@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+
+    <% countries.forEach(vals=>{%>
+        <section>
+            <form action="">
+                <h2>
+                    <%= vals.country %>
+                </h2>
+                <br>
+                <label for="TotalConfirmed">Total Confirmed</label>
+                <span id="TotalConfirmed">
+                    <%= vals.totalConfirmed %>
+                </span>
+                <br>
+                <label for="TotalDeaths">Total Deaths</label>
+                <span id="TotalDeaths">
+                    <%= vals.totalDeaths %>
+                </span>
+                <br>
+                <label for="TotalRecovered">Total Recovered</label>
+                <span id="TotalRecovered">
+                    <%= vals.totalRecovered %>
+                </span>
+                <br>
+
+                <span id="date">
+                    <%= vals.date %>
+                </span>
+                <input type="submit" value="add-to-my-records">
+            </form>
+        </section>
+        <br>
+        <% }) %>
+
+
+</body>
+
+</html>

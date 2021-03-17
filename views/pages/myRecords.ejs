@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <% if (typeof countries=='undefined' ) { %>
+        <h2>
+            No Records Availabe
+        </h2>
+
+        <% } %>
+
+            <% countries.forEach(vals=>{%>
+                <section>
+
+                    <h2>
+                        <%= vals.country %>
+                    </h2>
+                    <br>
+                    <label for="TotalConfirmed">Total Confirmed</label>
+                    <span id="TotalConfirmed">
+                        <%= vals.total_confirmed_cases %>
+                    </span>
+                    <br>
+                    <label for="TotalDeaths">Total Deaths</label>
+                    <span id="TotalDeaths">
+                        <%= vals.total_deaths_cases %>
+                    </span>
+                    <br>
+                    <label for="TotalRecovered">Total Recovered</label>
+                    <span id="TotalRecovered">
+                        <%= vals.total_recovered_cases %>
+                    </span>
+                    <br>
+
+                    <span id="date">
+                        <%= vals.the_date %>
+                    </span>
+                    <form action="/myRecords?_method=delete" method="POST">
+                        <input type="hidden" name="id" value="<%= vals.id %>">
+                        <input type="submit" value="Delete this record">
+                    </form>
+
+                </section>
+                <br>
+                <% }) %>
+
+
+</body>
+
+</html>

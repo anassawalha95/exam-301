@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+
+    <% totals.forEach(vals=>{%>
+        <section>
+            <label for="TotalConfirmed">Total Confirmed</label>
+            <span id="TotalConfirmed">
+                <%= vals.TotalConfirmed %>
+            </span>
+
+            <label for="TotalDeaths">Total Deaths</label>
+            <span id="TotalDeaths">
+                <%= vals.TotalDeaths %>
+            </span>
+
+            <label for="TotalRecovered">Total Recovered</label>
+            <span id="TotalRecovered">
+                <%= vals.TotalRecovered %>
+            </span>
+        </section>
+
+        <% }) %>
+
+            <section>
+                <form action="/action_page.php">
+
+                    <input type="text" id="country" name="country" placeholder="Add Country Name"><br>
+                    <input type="date" id="startDate" name="startDate" placeholder="Start Date"><br><br>
+                    <input type="date" id="endDate" name="endDate" placeholder="End Date"><br><br>
+                    <input type="submit" value="Search">
+                </form>
+            </section>
+</body>
+
+</html>
